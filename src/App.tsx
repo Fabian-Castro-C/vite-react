@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './animations.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [respuesta, setRespuesta] = useState<string | null>(null);
+  const [eggCount, setEggCount] = useState<number>(0);
+  const [easterEggMessage, setEasterEggMessage] = useState<string | null>(null);
+  const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({ position: "relative", left: "0px", top: "0px" });
+
+  const handleYes = () => {
+    setRespuesta('¡Genial! Sabía que aceptarías ser mi Valentín.');
+  };
+
+  const handleNo = () => {
+    setRespuesta('¡Oh no! ¿Seguro que no quieres ser mi Valentín?');
+  };
+
+  const handleTitleClick = () => {
+    const newCount = eggCount + 1;
+    setEggCount(newCount);
+    // Si se ha hecho click 5 veces o más, mostramos un easter egg
+    if (newCount >= 5 && !easterEggMessage) {
+      setEasterEggMessage('¡Easter Egg! Sabes que eres única y especial.');
+    }
+  };
+
+  const handleNoMouseEnter = () => {
+    // Mueve el botón "No" de forma aleatoria para hacerlo evasivo
+    const randomX = Math.floor(Math.random() * 100 - 50); // Valor entre -50 y 50 px
+    const randomY = Math.floor(Math.random() * 100 - 50);
+    setNoButtonStyle({ position: "relative", left: `${randomX}px`, top: `${randomY}px` });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="container">
+      <h1 className="titulo" onClick={handleTitleClick}>
+        ¿Quieres ser mi Valentín?
+      </h1>
+      <div className="botones">
+        <button className="btn yes" onClick={handleYes}>
+          Sí
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button className="btn no" onMouseEnter={handleNoMouseEnter} onClick={handleNo} style={noButtonStyle}>
+          No
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      {respuesta && <p className="respuesta">{respuesta}</p>}
+      {respuesta === '¡Genial! Sabía que aceptarías ser mi Valentín.' && (
+        <div className="hearts">
+          <span className="heart">❤️</span>
+          <span className="heart">❤️</span>
+          <span className="heart">❤️</span>
+        </div>
+      )}
+      {easterEggMessage && <p className="easter-egg">{easterEggMessage}</p>}
+    </div>
+  );
+};
 
-export default App
+export default App;
