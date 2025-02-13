@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [noButtonStyle, setNoButtonStyle] = useState<React.CSSProperties>({ position: "relative", left: "0px", top: "0px" });
 
   const handleYes = () => {
-    setRespuesta('¡Genial! Sabía que aceptarías ser mi Valentín.');
+    setRespuesta('¡Eres la mejor! Sabía que aceptarías ser mi Valentín.');
   };
 
   const handleNo = () => {
@@ -20,14 +20,14 @@ const App: React.FC = () => {
     setEggCount(newCount);
     // Si se ha hecho click 5 veces o más, mostramos un easter egg
     if (newCount >= 5 && !easterEggMessage) {
-      setEasterEggMessage('¡Easter Egg! Sabes que eres única y especial.');
+      setEasterEggMessage('¡Easter Egg! Mi Adrianita se va a casar conmigo algun día.');
     }
   };
 
   const handleNoMouseEnter = () => {
     // Mueve el botón "No" de forma aleatoria para hacerlo evasivo
-    const randomX = Math.floor(Math.random() * 100 - 50); // Valor entre -50 y 50 px
-    const randomY = Math.floor(Math.random() * 100 - 50);
+    const randomX = Math.floor(Math.random() * 200 - 100); // Valor entre -50 y 50 px
+    const randomY = Math.floor(Math.random() * 200 - 100);
     setNoButtonStyle({ position: "relative", left: `${randomX}px`, top: `${randomY}px` });
   };
 
@@ -45,7 +45,7 @@ const App: React.FC = () => {
         </button>
       </div>
       {respuesta && <p className="respuesta">{respuesta}</p>}
-      {respuesta === '¡Genial! Sabía que aceptarías ser mi Valentín.' && (
+      {respuesta === '¡Eres la mejor! Sabía que aceptarías ser mi Valentín.' && (
         <div className="hearts">
           <span className="heart">❤️</span>
           <span className="heart">❤️</span>
