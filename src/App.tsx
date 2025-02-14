@@ -12,7 +12,7 @@ const App: React.FC = () => {
   };
 
   const handleNo = () => {
-    setRespuesta('¡Oh no! ¿Seguro que no quieres ser mi Valentín?');
+    setRespuesta('¡Oh no! ¿Segura que no quieres ser mi Valentín?');
   };
 
   const handleTitleClick = () => {
